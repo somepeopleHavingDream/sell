@@ -1,6 +1,7 @@
 package com.imooc.bean;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Data
+@DynamicUpdate
 public class ProductCategory {
     // 类目id
     @Id
@@ -30,4 +32,12 @@ public class ProductCategory {
 
     // 更新时间
     private Date gmtModified;
+
+    public ProductCategory() {
+    }
+
+    public ProductCategory(String categoryName, Integer categoryType) {
+        this.categoryName = categoryName;
+        this.categoryType = categoryType;
+    }
 }

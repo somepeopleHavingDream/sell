@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
+ * 商品类目
+ *
  * @author yangxin
  * 2019/05/26 14:52
  */

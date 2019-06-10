@@ -1,0 +1,4 @@
+INSERT INTO sell.product_category (category_id, category_name, category_type, gmt_create, gmt_modified) VALUES (1, '热销榜', 2, '2019-05-26 15:11:32', '2019-05-26 15:11:32');
+INSERT INTO sell.product_category (category_id, category_name, category_type, gmt_create, gmt_modified) VALUES (2, '女生最爱', 11, '2019-05-26 15:46:48', '2019-05-30 21:35:42');
+INSERT INTO sell.product_category (category_id, category_name, category_type, gmt_create, gmt_modified) VALUES (3, '女生最爱', 10, '2019-05-30 21:44:12', '2019-05-30 21:44:12');
+INSERT INTO sell.product_category (category_id, category_name, category_type, gmt_create, gmt_modified) VALUES (4, '男生专享', 10, '2019-06-08 12:01:27', '2019-06-08 12:01:27');

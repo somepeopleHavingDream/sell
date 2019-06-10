@@ -9,7 +9,7 @@ CREATE TABLE product_category (
     gmt_create TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     gmt_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (category_id)
-) COMMENT '类目表';
+) COMMENT '类目表' CHARSET=utf8;
 
 -- 商品
 DROP TABLE IF EXISTS product_info;
@@ -25,7 +25,7 @@ CREATE TABLE product_info (
     gmt_create TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     gmt_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (product_id)
-) COMMENT '商品表';
+) COMMENT '商品表' CHARSET=utf8;
 
 -- 订单
 DROP TABLE IF EXISTS order_master;
@@ -42,7 +42,7 @@ CREATE TABLE order_master (
     gmt_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (order_id),
     key idx_buyer_openid (buyer_openid)
-) COMMENT '订单表';
+) COMMENT '订单表' CHARSET=utf8;
 
 -- 订单商品
 DROP TABLE IF EXISTS order_detail;
@@ -58,7 +58,7 @@ CREATE TABLE order_detail (
     gmt_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (detail_id),
     KEY IDX_ORDER_ID (order_id)
-) COMMENT '订单商品表';
+) COMMENT '订单商品表' CHARSET=utf8;
 
 -- 卖家（登录后台使用，卖家登录之后可能直接采用微信扫码登录，不使用账号密码）
 DROP TABLE IF EXISTS seller_info;
@@ -70,4 +70,4 @@ CREATE TABLE seller_info (
     gmt_create TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     gmt_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (id)
-) COMMENT '卖家信息表';
+) COMMENT '卖家信息表' CHARSET=utf8;

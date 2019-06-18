@@ -1,12 +1,24 @@
 package com.imooc.service.impl;
 
+import com.imooc.bean.OrderDetail;
+import com.imooc.bean.OrderMaster;
+import com.imooc.bean.ProductInfo;
 import com.imooc.dto.OrderDTO;
+import com.imooc.enums.ResultEnum;
+import com.imooc.exception.SellException;
+import com.imooc.repository.OrderDetailRepository;
+import com.imooc.repository.OrderMasterRepository;
 import com.imooc.service.OrderService;
 import com.imooc.service.ProductService;
+import com.imooc.util.KeyUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * 订单服务实现类
@@ -17,21 +29,52 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
+    private final OrderDetailRepository orderDetailRepository;
+    private final OrderMasterRepository orderMasterRepository;
 
     @Autowired
-    public OrderServiceImpl(ProductService productService) {
+    public OrderServiceImpl(ProductService productService,
+                            OrderDetailRepository orderDetailRepository,
+                            OrderMasterRepository orderMasterRepository) {
         this.productService = productService;
+        this.orderDetailRepository = orderDetailRepository;
+        this.orderMasterRepository = orderMasterRepository;
     }
 
     @Override
     public OrderDTO create(OrderDTO orderDTO) {
+        // 订单唯一编号
+        String orderId = KeyUtil.generateUniqueKey();
+
+        BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
+
         // 1. 查询商品（数量，价格）
-        orderDTO.getOrderDetailList().forEach(orderDetail -> {
-            productService.findOne(orderDetail.getProductId());
-        });
-        // 2. 计算总价
+        for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
+            ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
+            if (productInfo == null) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+
+            // 2. 计算订单总价
+            orderAmount = orderDetail.getProductPrice()
+                    .multiply(new BigDecimal(orderDetail.getProductQuantity()))
+                    .add(orderAmount);
+
+            // 订单详情入库
+            orderDetail.setDetailId(KeyUtil.generateUniqueKey());
+            orderDetail.setOrderId(orderId);
+            BeanUtils.copyProperties(productInfo, orderDetail);
+            orderDetailRepository.save(orderDetail);
+        }
+
         // 3. 写入订单数据库(order_master和order_detail)
+        OrderMaster orderMaster = new OrderMaster();
+        orderMaster.setOrderId(orderId);
+        orderMaster.setOrderAmount(orderAmount);
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+
         // 4. 扣库存
+
         return null;
     }
 

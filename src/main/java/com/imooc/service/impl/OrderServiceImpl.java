@@ -3,6 +3,7 @@ package com.imooc.service.impl;
 import com.imooc.bean.OrderDetail;
 import com.imooc.bean.OrderMaster;
 import com.imooc.bean.ProductInfo;
+import com.imooc.dto.CartDTO;
 import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
@@ -16,9 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单服务实现类
@@ -42,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
         // 订单唯一编号
         String orderId = KeyUtil.generateUniqueKey();
@@ -74,8 +79,12 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderDTO, orderMaster);
 
         // 4. 扣库存
+        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream()
+                .map(orderDetail -> new CartDTO(orderDetail.getProductId(), orderDetail.getProductQuantity()))
+                .collect(Collectors.toList());
+        productService.decreaseStock(cartDTOList);
 
-        return null;
+        return orderDTO;
     }
 
     @Override

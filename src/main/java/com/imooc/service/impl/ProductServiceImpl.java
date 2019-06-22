@@ -55,6 +55,9 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    /**
+     * 减库存
+     */
     @Override
     @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
@@ -68,7 +71,6 @@ public class ProductServiceImpl implements ProductService {
             if (result < 0) {
                 throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
-
             productInfo.setProductStock(result);
 
             productInfoRepository.save(productInfo);

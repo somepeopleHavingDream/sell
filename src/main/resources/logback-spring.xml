@@ -7,7 +7,6 @@
             </pattern>
         </layout>
     </appender>
-
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -22,10 +21,9 @@
         <!-- 滚动策略 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 路径 -->
-            <fileNamePattern>/var/log/tomcat/sell/info.%d.log</fileNamePattern>
+            <fileNamePattern>log/info.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
-
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -38,7 +36,7 @@
         <!-- 滚动策略 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 路径 -->
-            <fileNamePattern>/var/log/tomcat/sell/error.%d.log</fileNamePattern>
+            <fileNamePattern>log/error.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 

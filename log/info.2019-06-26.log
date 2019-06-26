@@ -1,0 +1,25 @@
+Starting OrderServiceImplTest on yx-PC with PID 10846 (started by yx in /home/yx/IdeaProjects/sell)
+No active profile set, falling back to default profiles: default
+Refreshing org.springframework.web.context.support.GenericWebApplicationContext@18271936: startup date [Wed Jun 26 21:45:37 CST 2019]; root of context hierarchy
+HV000001: Hibernate Validator 5.3.5.Final
+Building JPA container EntityManagerFactory for persistence unit 'default'
+HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+HHH000412: Hibernate Core {5.0.12.Final}
+HHH000206: hibernate.properties not found
+HHH000021: Bytecode provider name : javassist
+HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+Initialized JPA EntityManagerFactory for persistence unit 'default'
+Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@18271936: startup date [Wed Jun 26 21:45:37 CST 2019]; root of context hierarchy
+Mapped "{[/buyer/product/list],methods=[GET]}" onto public com.imooc.vo.ResultVO com.imooc.controller.BuyerProductController.list()
+Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+Started OrderServiceImplTest in 10.666 seconds (JVM running for 13.662)
+HHH000397: Using ASTQueryTranslatorFactory
+Closing org.springframework.web.context.support.GenericWebApplicationContext@18271936: startup date [Wed Jun 26 21:45:37 CST 2019]; root of context hierarchy
+Closing JPA EntityManagerFactory for persistence unit 'default'

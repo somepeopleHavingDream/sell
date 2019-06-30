@@ -15,7 +15,7 @@
         </filter>
         <encoder>
             <pattern>
-                %msg%n
+                %d - %msg%n
             </pattern>
         </encoder>
         <!-- 滚动策略 -->
@@ -30,7 +30,7 @@
         </filter>
         <encoder>
             <pattern>
-                %msg%n
+                %d - %msg%n
             </pattern>
         </encoder>
         <!-- 滚动策略 -->

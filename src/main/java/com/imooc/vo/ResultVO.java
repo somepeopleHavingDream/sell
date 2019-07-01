@@ -9,6 +9,7 @@ import lombok.Data;
  * 2019/06/08 16:10
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVO<T> {
     // 错误码
     private Integer code;

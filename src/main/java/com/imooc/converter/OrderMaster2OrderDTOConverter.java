@@ -14,12 +14,22 @@ import java.util.stream.Collectors;
  * 2019/06/23 21:36
  */
 public final class OrderMaster2OrderDTOConverter {
-    public static OrderDTO convert(OrderMaster orderMaster) {
+    /**
+     * 将单个订单对象转换成OrderDTO对象
+     *
+     * @param orderMaster 订单对象
+     */
+    private static OrderDTO convert(OrderMaster orderMaster) {
         OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
         return orderDTO;
     }
 
+    /**
+     * 将订单对象集合转换为OrderDTO对象集合
+     *
+     * @param orderMasterList 订单对象集合
+     */
     public static List<OrderDTO> convert(List<OrderMaster> orderMasterList) {
         return orderMasterList.stream()
                     .map(OrderMaster2OrderDTOConverter::convert)

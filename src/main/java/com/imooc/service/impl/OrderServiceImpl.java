@@ -121,9 +121,17 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+    /**
+     * 查询订单列表
+     *
+     * @param buyerOpenid 买家openid
+     * @param pageable 分页对象
+     */
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
+        // 分页查询订单列表
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        // 将订单对象集合转换为OrderDTO对象集合
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
 
         return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());

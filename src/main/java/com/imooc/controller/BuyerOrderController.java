@@ -77,11 +77,13 @@ public class BuyerOrderController {
                                          @RequestParam(value = "size", defaultValue = "10") Integer size) {
         log.info("BuyerOrderController.list is running...");
 
+        // openid不能为空
         if (StringUtils.isEmpty(openid)) {
             log.error("【查询订单列表】openid为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
 
+        // 查询订单列表
         PageRequest pageRequest = new PageRequest(page, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, pageRequest);
 

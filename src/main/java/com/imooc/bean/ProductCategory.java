@@ -18,25 +18,32 @@ import java.util.Date;
 @Data
 @DynamicUpdate
 public class ProductCategory {
-    // 类目id
+    /**
+     * 类目Id
+     */
     @Id
     @GeneratedValue
     private Integer categoryId;
 
-    // 类目名字
+    /**
+     * 类目名字
+     */
     private String categoryName;
 
-    // 类目编号
+    /**
+     * 类目编号
+     */
     private Integer categoryType;
 
-    // 创建时间
+    /**
+     * 创建时间
+     */
     private Date gmtCreate;
 
-    // 更新时间
+    /**
+     * 更新时间
+     */
     private Date gmtModified;
-
-    public ProductCategory() {
-    }
 
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;

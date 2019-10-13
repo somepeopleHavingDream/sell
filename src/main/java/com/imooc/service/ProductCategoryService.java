@@ -13,6 +13,11 @@ import java.util.List;
 public interface ProductCategoryService {
     ProductCategory findOne(Integer categoryId);
     List<ProductCategory> findAll();
+
+    /**
+     * 获得特定范围内的商品类型的记录信息
+     */
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
+
     ProductCategory save(ProductCategory productCategory);
 }

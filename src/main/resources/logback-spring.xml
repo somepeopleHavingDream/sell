@@ -3,7 +3,7 @@
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-                %d - %msg%n
+                %d  %-5level  %-90c#%-30method : %msg%n
             </pattern>
         </layout>
     </appender>
@@ -15,7 +15,7 @@
         </filter>
         <encoder>
             <pattern>
-                %d - %msg%n
+                %d  %-5level  %-90c#%-30method : %msg%n
             </pattern>
         </encoder>
         <!-- 滚动策略 -->
@@ -30,7 +30,7 @@
         </filter>
         <encoder>
             <pattern>
-                %d - %msg%n
+                %d  %-5level  %-90c#%-30method : %msg%n
             </pattern>
         </encoder>
         <!-- 滚动策略 -->

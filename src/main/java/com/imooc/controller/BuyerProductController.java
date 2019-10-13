@@ -8,6 +8,7 @@ import com.imooc.util.ResultVOUtil;
 import com.imooc.vo.ProductInfoVO;
 import com.imooc.vo.ProductVO;
 import com.imooc.vo.ResultVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/buyer/product")
+@Slf4j
 public class BuyerProductController {
     private final ProductService productService;
     private final ProductCategoryService productCategoryService;
@@ -41,6 +43,7 @@ public class BuyerProductController {
     public ResultVO list() {
         // 1. 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
+        log.info("productInfoList.size: [{}]", productInfoList.size());
 
         // 2. 查询类目（一次性查询）
         // 精简方法(java8, lambda)
@@ -48,14 +51,21 @@ public class BuyerProductController {
                 .map(ProductInfo::getCategoryType)
                 .collect(Collectors.toList());
         List<ProductCategory> productCategoryList = productCategoryService.findByCategoryTypeIn(categoryTypeList);
+        log.info("categoryTypeList.size: [{}], productCategoryList.size: [{}]",
+                categoryTypeList.size(), productCategoryList.size());
 
         // 3. 数据拼装
         List<ProductVO> productVOList = new ArrayList<>();
         for (ProductCategory productCategory : productCategoryList) {
-            ProductVO productVO = new ProductVO();
-            productVO.setCategoryType(productCategory.getCategoryType());
-            productVO.setCategoryName(productCategory.getCategoryName());
+            ProductVO productVO = ProductVO.builder()
+                    .categoryType(productCategory.getCategoryType())
+                    .categoryName(productCategory.getCategoryName())
+                    .build();
+//            ProductVO productVO = new ProductVO();
+//            productVO.setCategoryType(productCategory.getCategoryType());
+//            productVO.setCategoryName(productCategory.getCategoryName());
 
+            // 构建productInfoVOList
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             for (ProductInfo productInfo : productInfoList) {
                 if (Objects.equals(productInfo.getCategoryType(), productCategory.getCategoryType())) {
@@ -64,6 +74,7 @@ public class BuyerProductController {
                     productInfoVOList.add(productInfoVO);
                 }
             }
+
             productVO.setProductInfoVOList(productInfoVOList);
             productVOList.add(productVO);
         }

@@ -61,9 +61,6 @@ public class BuyerProductController {
                     .categoryType(productCategory.getCategoryType())
                     .categoryName(productCategory.getCategoryName())
                     .build();
-//            ProductVO productVO = new ProductVO();
-//            productVO.setCategoryType(productCategory.getCategoryType());
-//            productVO.setCategoryName(productCategory.getCategoryName());
 
             // 构建productInfoVOList
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();

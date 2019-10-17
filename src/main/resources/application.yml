@@ -9,5 +9,11 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
+
 server:
   context-path: /sell
+  port: 18080
+
+wechat:
+  mpAppId: wxb9b8ef133831adbe
+  mpAppSecret: 22d95c1f0751d30e9f1919e674e6173c

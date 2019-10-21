@@ -45,6 +45,8 @@ public class WechatController {
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
                 WxConsts.OAUTH2_SCOPE_BASE,
                 URLEncoder.encode(returnUrl, "utf-8"));
+        log.info("redirectUrl: [{}]", redirectUrl);
+
         return "redirect:" + redirectUrl;
     }
 

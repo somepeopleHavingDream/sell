@@ -19,12 +19,17 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.springboot</groupId>
+            <artifactId>best-pay-sdk</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-mp -->
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-mp</artifactId>
             <version>2.7.0</version>
-<!--            <version>3.5.6.B</version>-->
         </dependency>
 
         <dependency>

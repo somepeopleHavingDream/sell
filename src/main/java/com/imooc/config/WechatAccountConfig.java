@@ -38,4 +38,9 @@ public class WechatAccountConfig {
      * 商户证书路径
      */
     private String keyPath;
+
+    /**
+     * 微信支付异步通知地址
+     */
+    private String notifyUrl;
 }

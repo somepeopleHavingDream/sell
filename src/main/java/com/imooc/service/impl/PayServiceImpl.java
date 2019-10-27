@@ -23,8 +23,14 @@ public class PayServiceImpl implements PayService {
         this.bestPayService = bestPayService;
     }
 
+    /**
+     * 预支付
+     */
     @Override
     public void create(OrderDTO orderDTO) {
+        log.info("orderDTO: [{}]", JsonUtil.toJson(orderDTO));
+
+        // 发起请求
         PayRequest payRequest = new PayRequest();
         payRequest.setOpenid(orderDTO.getBuyerOpenid());
         payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
@@ -33,6 +39,7 @@ public class PayServiceImpl implements PayService {
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
         log.info("【微信支付】payRequest: [{}]", JsonUtil.toJson(payRequest));
 
+        // 返回响应
         PayResponse payResponse = bestPayService.pay(payRequest);
         log.info("【微信支付】payResponse: [{}]", JsonUtil.toJson(payResponse));
     }

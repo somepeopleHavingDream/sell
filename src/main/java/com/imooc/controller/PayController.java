@@ -29,7 +29,8 @@ public class PayController {
     }
 
     /**
-     * 创建订单
+     * 发起支付
+     * http://proxy.springboot.cn/pay?openid=oTgZpwQGQoHHb-opLH0u6EnxRD9w&orderId=1561213773204650786&returnUrl=sell.com
      *
      * @param orderId 订单id
      * @param returnUrl 重定向url

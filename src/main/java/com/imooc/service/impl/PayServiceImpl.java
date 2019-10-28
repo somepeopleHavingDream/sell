@@ -27,7 +27,7 @@ public class PayServiceImpl implements PayService {
      * 预支付
      */
     @Override
-    public void create(OrderDTO orderDTO) {
+    public PayResponse create(OrderDTO orderDTO) {
         log.info("orderDTO: [{}]", JsonUtil.toJson(orderDTO));
 
         // 发起请求
@@ -42,5 +42,7 @@ public class PayServiceImpl implements PayService {
         // 返回响应
         PayResponse payResponse = bestPayService.pay(payRequest);
         log.info("【微信支付】payResponse: [{}]", JsonUtil.toJson(payResponse));
+
+        return payResponse;
     }
 }

@@ -4,12 +4,17 @@ import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
+import com.imooc.service.PayService;
+import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * 支付Controller
@@ -22,10 +27,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class PayController {
     private final OrderService orderService;
+    private final PayService payService;
 
     @Autowired
-    public PayController(OrderService orderService) {
+    public PayController(OrderService orderService, PayService payService) {
         this.orderService = orderService;
+        this.payService = payService;
     }
 
     /**
@@ -36,8 +43,9 @@ public class PayController {
      * @param returnUrl 重定向url
      */
     @GetMapping("create")
-    public void create (@RequestParam("orderId") String orderId,
-                        @RequestParam("returnUrl") String returnUrl) {
+    public ModelAndView create (@RequestParam("orderId") String orderId,
+                                @RequestParam("returnUrl") String returnUrl,
+                                Map<String, Object> map) {
         log.info("orderId: [{}], returnUrl: [{}]", orderId, returnUrl);
 
         // 1. 查询订单
@@ -47,5 +55,9 @@ public class PayController {
         }
 
         // 2. 发起支付
+        PayResponse payResponse = payService.create(orderDTO);
+        map.put("payResponse", payResponse);
+        map.put("returnUrl", returnUrl);
+        return new ModelAndView("pay/create", map);
     }
 }

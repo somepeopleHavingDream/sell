@@ -9,9 +9,7 @@ import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -59,5 +57,18 @@ public class PayController {
         map.put("payResponse", payResponse);
         map.put("returnUrl", returnUrl);
         return new ModelAndView("pay/create", map);
+    }
+
+    /**
+     * 微信异步通知
+     *
+     * @param notifyData 微信异步通知数据（xml格式）
+     */
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData) {
+        payService.notify(notifyData);
+
+        // 返回给微信处理结果
+        return new ModelAndView("pay/success");
     }
 }

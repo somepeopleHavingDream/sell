@@ -10,6 +10,8 @@ import com.imooc.util.MathUtil;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public PayResponse notify(String notifyData) {
+    public void notify(String notifyData) {
         // 1. 验证签名 （sdk已完成此部分工作）
         // 2. 支付的状态 （sdk已完成此部分工作）
         // 3. 支付金额
@@ -68,7 +70,6 @@ public class PayServiceImpl implements PayService {
 
         // 判断金额是否一致（0.10,0.1）
         if (!MathUtil.equals(payResponse.getOrderAmount(), orderDTO.getOrderAmount().doubleValue())) {
-//        if (!Objects.equals(orderDTO.getOrderAmount(), new BigDecimal(payResponse.getOrderAmount()))) {
             log.error("【微信支付】异步通知，订单金额不一致，orderId=[{}]，微信通知金额=[{}]，系统金额=[{}]",
                     payResponse.getOrderId(),
                     payResponse.getOrderAmount(),
@@ -78,6 +79,19 @@ public class PayServiceImpl implements PayService {
 
         // 修改订单的支付状态
         orderService.paid(orderDTO);
-        return payResponse;
+    }
+
+    @Override
+    public void refund(OrderDTO orderDTO) {
+        log.info("orderDTO: [{}]", JsonUtil.toJson(orderDTO));
+
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setOrderId(orderDTO.getOrderId());
+        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        log.info("【微信退款】request = [{}]", JsonUtil.toJson(refundRequest));
+
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+        log.info("【微信退款】response = [{}]", JsonUtil.toJson(refundResponse));
     }
 }

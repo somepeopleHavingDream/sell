@@ -13,6 +13,7 @@ import com.imooc.exception.SellException;
 import com.imooc.repository.OrderDetailRepository;
 import com.imooc.repository.OrderMasterRepository;
 import com.imooc.service.OrderService;
+import com.imooc.service.PayService;
 import com.imooc.service.ProductService;
 import com.imooc.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,14 +44,16 @@ public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderMasterRepository orderMasterRepository;
+    private final PayService payService;
 
     @Autowired
     public OrderServiceImpl(ProductService productService,
                             OrderDetailRepository orderDetailRepository,
-                            OrderMasterRepository orderMasterRepository) {
+                            OrderMasterRepository orderMasterRepository, PayService payService) {
         this.productService = productService;
         this.orderDetailRepository = orderDetailRepository;
         this.orderMasterRepository = orderMasterRepository;
+        this.payService = payService;
     }
 
     /**
@@ -175,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 如果已支付，需要退款
         if (Objects.equals(orderDTO.getPayStatus(), PayStatusEnum.SUCCESS.getCode())) {
-            // TODO
+            payService.refund(orderDTO);
         }
 
         return orderDTO;

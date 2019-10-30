@@ -18,5 +18,10 @@ public interface PayService {
     /**
      * 微信异步通知
      */
-    PayResponse notify(String notifyData);
+    void notify(String notifyData);
+
+    /**
+     * 退款
+     */
+    void refund(OrderDTO orderDTO);
 }

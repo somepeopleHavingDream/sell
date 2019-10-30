@@ -1,7 +1,11 @@
 package com.imooc.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.imooc.bean.OrderDetail;
+import com.imooc.enums.OrderStatusEnum;
+import com.imooc.enums.PayStatusEnum;
+import com.imooc.util.EnumUtil;
 import com.imooc.util.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -69,5 +73,24 @@ public class OrderDTO {
     @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
+    /**
+     * 订单详情
+     */
     List<OrderDetail> orderDetailList;
+
+    /**
+     * 得到订单状态的枚举
+     */
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    /**
+     * 得到支付状态的枚举
+     */
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

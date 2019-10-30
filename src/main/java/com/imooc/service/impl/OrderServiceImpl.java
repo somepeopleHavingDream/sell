@@ -44,16 +44,21 @@ public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderMasterRepository orderMasterRepository;
-    private final PayService payService;
+
+    /**
+     * 为了避免环形自动装配，而不采用private final的方式
+     */
+    @Autowired
+    private PayService payService;
 
     @Autowired
     public OrderServiceImpl(ProductService productService,
                             OrderDetailRepository orderDetailRepository,
-                            OrderMasterRepository orderMasterRepository, PayService payService) {
+                            OrderMasterRepository orderMasterRepository) {
         this.productService = productService;
         this.orderDetailRepository = orderDetailRepository;
         this.orderMasterRepository = orderMasterRepository;
-        this.payService = payService;
+//        this.payService = payService;
     }
 
     /**
@@ -127,16 +132,20 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
-    /**
-     * 查询订单列表
-     *
-     * @param buyerOpenid 买家openid
-     * @param pageable 分页对象
-     */
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
         // 分页查询订单列表
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        // 将订单对象集合转换为OrderDTO对象集合
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+
+        return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        // 分页查询订单列表
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
         // 将订单对象集合转换为OrderDTO对象集合
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
 

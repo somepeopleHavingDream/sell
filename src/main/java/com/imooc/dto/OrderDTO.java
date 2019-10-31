@@ -7,6 +7,7 @@ import com.imooc.enums.OrderStatusEnum;
 import com.imooc.enums.PayStatusEnum;
 import com.imooc.util.EnumUtil;
 import com.imooc.util.serializer.Date2LongSerializer;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import java.util.List;
  * 2019/06/17 22:38
  */
 @Data
+@Builder
 public class OrderDTO {
     /**
      * 订单id

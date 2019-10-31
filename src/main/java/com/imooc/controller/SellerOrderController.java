@@ -1,6 +1,8 @@
 package com.imooc.controller;
 
 import com.imooc.dto.OrderDTO;
+import com.imooc.enums.ResultEnum;
+import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class SellerOrderController {
         this.orderService = orderService;
     }
 
+    /**
+     * 分页列出所有订单
+     */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10") Integer size,
@@ -47,5 +52,24 @@ public class SellerOrderController {
         //        orderDTOPage.getTotalPages();
 
         return new ModelAndView("/order/list", map);
+    }
+
+    @GetMapping("/cancel")
+    public ModelAndView cancel(@RequestParam("orderId") String orderId,
+                               Map<String, Object> map) {
+        try {
+            OrderDTO orderDTO = orderService.findOne(orderId);
+            orderService.cancel(orderDTO);
+        } catch (SellException e) {
+            log.error("【卖家端取消订单】发生异常", e);
+
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/order/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("msg", ResultEnum.SUCCESS.getMessage());
+        map.put("url", "/sell/seller/order/list");
+        return new ModelAndView("common/success");
     }
 }

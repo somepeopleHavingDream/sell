@@ -1,7 +1,10 @@
 package com.imooc.controller;
 
+import com.imooc.dto.OrderDTO;
 import com.imooc.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/seller/order")
+@Slf4j
 public class SellerOrderController {
     private final OrderService orderService;
 
@@ -31,8 +35,16 @@ public class SellerOrderController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10") Integer size,
                              Map<String, Object> map) {
+        log.info("page: [{}], size: [{}]", page, size);
+
         PageRequest pageRequest = new PageRequest(page - 1, size);
-        map.put("orderDTOPage", orderService.findList(pageRequest));
+        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        log.info("orderDTOPage: [{}]", orderDTOPage);
+
+        map.put("orderDTOPage", orderDTOPage);
+        map.put("currentPage", page);
+        map.put("size", size);
+        //        orderDTOPage.getTotalPages();
 
         return new ModelAndView("/order/list", map);
     }

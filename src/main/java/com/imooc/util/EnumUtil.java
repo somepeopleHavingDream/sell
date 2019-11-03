@@ -11,6 +11,9 @@ import java.util.Objects;
  * 2019/10/30 15:58
  */
 public class EnumUtil {
+    /**
+     * 通过状态值获得枚举对象
+     */
     public static <T extends CodeEnum> T getByCode(Integer code, Class<T> enumClass) {
         for (T e : enumClass.getEnumConstants()) {
             if (Objects.equals(e.getCode(), code)) {

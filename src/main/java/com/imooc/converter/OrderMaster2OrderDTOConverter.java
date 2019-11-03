@@ -20,7 +20,8 @@ public final class OrderMaster2OrderDTOConverter {
      * @param orderMaster 订单对象
      */
     private static OrderDTO convert(OrderMaster orderMaster) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO = OrderDTO.builder().build();
+//        OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
         return orderDTO;
     }

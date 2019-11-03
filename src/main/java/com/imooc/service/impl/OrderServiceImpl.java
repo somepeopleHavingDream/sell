@@ -125,7 +125,8 @@ public class OrderServiceImpl implements OrderService {
         }
 
         // 设置订单dto
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO = OrderDTO.builder().build();
+//        OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
         orderDTO.setOrderDetailList(orderDetailList);
 

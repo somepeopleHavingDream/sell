@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * 商品服务实现测试类
  *
@@ -46,7 +44,6 @@ public class ProductServiceImplTest {
     public void findAll() {
         PageRequest pageRequest = new PageRequest(0, 2);
         Page<ProductInfo> productInfoPage = productService.findAll(pageRequest);
-//        log.info("productInfoPage.getTotalElements: [{}]", productInfoPage.getTotalElements());
         Assert.assertNotEquals(0, productInfoPage.getTotalElements());
     }
 
@@ -64,5 +61,17 @@ public class ProductServiceImplTest {
 
         ProductInfo result = productService.save(productInfo);
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void onSale() {
+        ProductInfo result = productService.onSale("123456");
+        Assert.assertEquals(ProductStatusEnum.UP, result.getProductStatusEnum());
+    }
+
+    @Test
+    public void offSale() {
+        ProductInfo result = productService.offSale("123456");
+        Assert.assertEquals(ProductStatusEnum.DOWN, result.getProductStatusEnum());
     }
 }

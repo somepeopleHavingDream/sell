@@ -35,7 +35,8 @@ public class OrderServiceImplTest {
 
     @Test
     public void create() {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO = OrderDTO.builder().build();
+//        OrderDTO orderDTO = new OrderDTO();
         orderDTO.setBuyerName("廖师兄");
         orderDTO.setBuyerAddress("慕课网");
         orderDTO.setBuyerPhone("123456789012");

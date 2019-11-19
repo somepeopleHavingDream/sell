@@ -1,7 +1,7 @@
 package com.imooc.enums;
 
 /**
- * code枚举类
+ * code接口
  *
  * @author yangxin
  * 2019/10/30 15:54

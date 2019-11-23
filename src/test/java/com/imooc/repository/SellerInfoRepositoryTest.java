@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 卖家信息
+ *
+ * @author yangxin
+ * 2019/11/23 22:27
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

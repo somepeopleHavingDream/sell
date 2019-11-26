@@ -36,7 +36,6 @@ public class OrderServiceImplTest {
     @Test
     public void create() {
         OrderDTO orderDTO = OrderDTO.builder().build();
-//        OrderDTO orderDTO = new OrderDTO();
         orderDTO.setBuyerName("廖师兄");
         orderDTO.setBuyerAddress("慕课网");
         orderDTO.setBuyerPhone("123456789012");
@@ -102,7 +101,6 @@ public class OrderServiceImplTest {
     public void testFindList() {
         PageRequest pageRequest = new PageRequest(0, 2);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
-//        Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
         Assert.assertTrue("查询所有的订单列表", orderDTOPage.getTotalElements() > 0);
     }
 }

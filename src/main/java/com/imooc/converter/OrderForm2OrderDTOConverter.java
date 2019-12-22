@@ -23,7 +23,6 @@ public final class OrderForm2OrderDTOConverter {
 
     public static OrderDTO convert(OrderForm orderForm) {
         OrderDTO orderDTO = OrderDTO.builder().build();
-//        OrderDTO orderDTO = new OrderDTO();
         orderDTO.setBuyerName(orderForm.getName());
         orderDTO.setBuyerPhone(orderForm.getPhone());
         orderDTO.setBuyerAddress(orderForm.getAddress());

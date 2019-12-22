@@ -20,6 +20,11 @@ wechat:
 #  mpAppId: wxb9b8ef133831adbe
   mpAppSecret: 22d95c1f0751d30e9f1919e674e6173c
 
+  # 开发平台
+#  openAppId: oTgZpwQGQoHHb-opLH0u6EnxRD9w
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
+
   # 支付/商户号
   mchId: 1483469312
   mchKey: 098F6BCD4621D373CADE4E832627B4F6

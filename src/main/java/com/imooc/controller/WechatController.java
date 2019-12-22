@@ -27,10 +27,12 @@ import java.net.URLEncoder;
 @Slf4j
 public class WechatController {
     private final WxMpService wxMpService;
+    private final WxMpService wxOpenService;
 
     @Autowired
-    public WechatController(WxMpService wxMpService) {
+    public WechatController(WxMpService wxMpService, WxMpService wxOpenService) {
         this.wxMpService = wxMpService;
+        this.wxOpenService = wxOpenService;
     }
 
     /**
@@ -62,6 +64,50 @@ public class WechatController {
         try {
             // 构建获取access_token的url
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+        } catch (WxErrorException e) {
+            log.error("【微信网页授权】", e);
+            throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
+        }
+
+        String openId = wxMpOAuth2AccessToken.getOpenId();
+        log.info("openId: [{}]", openId);
+
+        return "redirect:" + returnUrl + "?openid=" + openId;
+    }
+
+    /**
+     * 二维码授权
+     * <p>
+     * https://open.weixin.qq.com/connect/qrconnect?appid=wx6ad144e54af67d87&redirect_uri=http%3A%2F%2Fsell.springboot.cn%2Fsell%2Fqr%2FoTgZpwQGQoHHb-opLH0u6EnxRD9w&response_type=code&scope=snsapi_login&state=http%3a%2f%2fabc.natapp.cc%2fsell%2fwechat%2fqrUserInfo
+     */
+    @GetMapping("/qrAuthorize")
+    public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
+        log.info("returnUrl: [{}]", returnUrl);
+
+        String url = "http://yxsell.nat300.top/sell/wechat/qrUserInfo";
+        String redirectUrl = wxOpenService.buildQrConnectUrl(url,
+                WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN,
+                URLEncoder.encode(returnUrl));
+        log.info("url: [{}]", url);
+
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * 二维码的用户信息
+     */
+    @GetMapping("/qrUserInfo")
+//    public String qrUserInfo(@RequestParam("code") String code) {
+    public String qrUserInfo(@RequestParam("code") String code,
+                             @RequestParam(value = "state", defaultValue = "www.imooc.com") String returnUrl) {
+//        log.info("code: [{}]", code);
+        log.info("code: [{}], returnUrl: [{}]", code, returnUrl);
+
+        // 通过code换取网页授权access_token
+        WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
+        try {
+            // 构建获取access_token的url
+            wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】", e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());

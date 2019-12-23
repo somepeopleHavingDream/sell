@@ -1,5 +1,6 @@
 package com.imooc.controller;
 
+import com.imooc.config.ProjectUrlConfig;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +30,13 @@ public class WechatController {
     private final WxMpService wxMpService;
     private final WxMpService wxOpenService;
 
+    private final ProjectUrlConfig projectUrlConfig;
+
     @Autowired
-    public WechatController(WxMpService wxMpService, WxMpService wxOpenService) {
+    public WechatController(WxMpService wxMpService, WxMpService wxOpenService, ProjectUrlConfig projectUrlConfig) {
         this.wxMpService = wxMpService;
         this.wxOpenService = wxOpenService;
+        this.projectUrlConfig = projectUrlConfig;
     }
 
     /**
@@ -43,7 +47,7 @@ public class WechatController {
         log.info("returnUrl: [{}]", returnUrl);
 
         // 构建访问微信网页授权的url
-        String url = "http://yxsell.nat300.top/sell/wechat/userInfo";
+        String url = projectUrlConfig.getWechatMpAuthorize() + "/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
                 WxConsts.OAUTH2_SCOPE_BASE,
                 URLEncoder.encode(returnUrl, "utf-8"));
@@ -84,11 +88,11 @@ public class WechatController {
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
         log.info("returnUrl: [{}]", returnUrl);
 
-        String url = "http://yxsell.nat300.top/sell/wechat/qrUserInfo";
+        String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
         String redirectUrl = wxOpenService.buildQrConnectUrl(url,
                 WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN,
                 URLEncoder.encode(returnUrl));
-        log.info("url: [{}]", url);
+        log.info("redirectUrl: [{}]", redirectUrl);
 
         return "redirect:" + redirectUrl;
     }
@@ -97,10 +101,8 @@ public class WechatController {
      * 二维码的用户信息
      */
     @GetMapping("/qrUserInfo")
-//    public String qrUserInfo(@RequestParam("code") String code) {
-    public String qrUserInfo(@RequestParam("code") String code,
-                             @RequestParam(value = "state", defaultValue = "www.imooc.com") String returnUrl) {
-//        log.info("code: [{}]", code);
+    public String qrUserInfo(@RequestParam("code") String code) {
+        String returnUrl = "http://www.imooc.com";
         log.info("code: [{}], returnUrl: [{}]", code, returnUrl);
 
         // 通过code换取网页授权access_token

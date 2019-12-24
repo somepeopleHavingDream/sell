@@ -5,7 +5,7 @@ import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
 import com.imooc.service.PayService;
-import com.imooc.util.JsonUtil;
+import com.imooc.util.JSONUtil;
 import com.imooc.util.MathUtil;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
@@ -33,7 +33,7 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public PayResponse create(OrderDTO orderDTO) {
-        log.info("orderDTO: [{}]", JsonUtil.toJson(orderDTO));
+        log.info("orderDTO: [{}]", JSONUtil.toJSON(orderDTO));
 
         // 发起请求
         PayRequest payRequest = new PayRequest();
@@ -42,11 +42,11 @@ public class PayServiceImpl implements PayService {
         payRequest.setOrderId(orderDTO.getOrderId());
         payRequest.setOrderName(ORDER_NAME);
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
-        log.info("【微信支付】发起支付，payRequest: [{}]", JsonUtil.toJson(payRequest));
+        log.info("【微信支付】发起支付，payRequest: [{}]", JSONUtil.toJSON(payRequest));
 
         // 返回响应
         PayResponse payResponse = bestPayService.pay(payRequest);
-        log.info("【微信支付】发起支付，payResponse: [{}]", JsonUtil.toJson(payResponse));
+        log.info("【微信支付】发起支付，payResponse: [{}]", JSONUtil.toJSON(payResponse));
 
         return payResponse;
     }
@@ -59,7 +59,7 @@ public class PayServiceImpl implements PayService {
         // 4. 支付人（下单人 == 支付人，看是否有次业务需求）
 
         PayResponse payResponse = bestPayService.asyncNotify(notifyData);
-        log.info("【微信支付】异步通知，payResponse: [{}]", JsonUtil.toJson(payResponse));
+        log.info("【微信支付】异步通知，payResponse: [{}]", JSONUtil.toJSON(payResponse));
 
         // 查询订单
         OrderDTO orderDTO = orderService.findOne(payResponse.getOrderId());
@@ -83,15 +83,15 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public void refund(OrderDTO orderDTO) {
-        log.info("orderDTO: [{}]", JsonUtil.toJson(orderDTO));
+        log.info("orderDTO: [{}]", JSONUtil.toJSON(orderDTO));
 
         RefundRequest refundRequest = new RefundRequest();
         refundRequest.setOrderId(orderDTO.getOrderId());
         refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
         refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
-        log.info("【微信退款】request = [{}]", JsonUtil.toJson(refundRequest));
+        log.info("【微信退款】request = [{}]", JSONUtil.toJSON(refundRequest));
 
         RefundResponse refundResponse = bestPayService.refund(refundRequest);
-        log.info("【微信退款】response = [{}]", JsonUtil.toJson(refundResponse));
+        log.info("【微信退款】response = [{}]", JSONUtil.toJSON(refundResponse));
     }
 }

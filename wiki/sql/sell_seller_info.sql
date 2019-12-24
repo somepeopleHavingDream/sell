@@ -1,0 +1,1 @@
+INSERT INTO sell.seller_info (seller_id, username, password, openid, create_time, update_time) VALUES ('1574519094742380012', 'admin', 'admin', 'abc', '2019-11-23 14:24:54', '2019-11-23 14:24:54');

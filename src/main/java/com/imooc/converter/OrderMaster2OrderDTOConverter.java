@@ -21,7 +21,6 @@ public final class OrderMaster2OrderDTOConverter {
      */
     private static OrderDTO convert(OrderMaster orderMaster) {
         OrderDTO orderDTO = OrderDTO.builder().build();
-//        OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
         return orderDTO;
     }

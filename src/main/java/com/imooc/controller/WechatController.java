@@ -82,10 +82,11 @@ public class WechatController {
     /**
      * 二维码授权
      * <p>
-     * https://open.weixin.qq.com/connect/qrconnect?appid=wx6ad144e54af67d87&redirect_uri=http%3A%2F%2Fsell.springboot.cn%2Fsell%2Fqr%2FoTgZpwQGQoHHb-opLH0u6EnxRD9w&response_type=code&scope=snsapi_login&state=http%3a%2f%2fabc.natapp.cc%2fsell%2fwechat%2fqrUserInfo
+     * https://open.weixin.qq.com/connect/qrconnect?appid=wx6ad144e54af67d87&redirect_uri=http%3A%2F%2Fsell.springboot.cn%2Fsell%2Fqr%2FoTgZpwQGQoHHb-opLH0u6EnxRD9w&response_type=code&scope=snsapi_login&state=http%3a%2f%2fyxsell.nat300.top%2fsell%2fwechat%2fqrUserInfo
      */
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
+        // 要接收code的url地址
         log.info("returnUrl: [{}]", returnUrl);
 
         String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
@@ -94,6 +95,7 @@ public class WechatController {
                 URLEncoder.encode(returnUrl));
         log.info("redirectUrl: [{}]", redirectUrl);
 
+        // 微信回调地址
         return "redirect:" + redirectUrl;
     }
 
@@ -102,7 +104,9 @@ public class WechatController {
      */
     @GetMapping("/qrUserInfo")
     public String qrUserInfo(@RequestParam("code") String code) {
-        String returnUrl = "http://www.imooc.com";
+        // 二维码登录成功后的回调地址，返回到登录页面
+        String returnUrl = projectUrlConfig.getSell() + "/sell/seller/login";
+//        String returnUrl = "http://www.imooc.com";
         log.info("code: [{}], returnUrl: [{}]", code, returnUrl);
 
         // 通过code换取网页授权access_token

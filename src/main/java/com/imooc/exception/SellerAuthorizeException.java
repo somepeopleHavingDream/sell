@@ -3,23 +3,23 @@ package com.imooc.exception;
 import com.imooc.enums.ResultEnum;
 
 /**
- * 业务异常类
+ * 卖家授权
  *
  * @author yangxin
- * 2019/06/18 13:59
+ * 2019/12/27 17:26
  */
-public class SellException extends RuntimeException {
+public class SellerAuthorizeException extends RuntimeException {
     /**
      * 状态码
      */
     private Integer code;
 
-    public SellException(ResultEnum resultEnum) {
+    public SellerAuthorizeException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
     }
 
-    public SellException(Integer code, String message) {
+    public SellerAuthorizeException(Integer code, String message) {
         super(message);
         this.code = code;
     }

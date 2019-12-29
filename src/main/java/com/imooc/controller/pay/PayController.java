@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.pay;
 
 import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;

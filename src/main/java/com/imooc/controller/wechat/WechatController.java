@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.wechat;
 
 import com.imooc.config.ProjectUrlConfig;
 import com.imooc.enums.ResultEnum;

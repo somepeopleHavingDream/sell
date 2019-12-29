@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.seller;
 
 import com.imooc.bean.ProductCategory;
 import com.imooc.bean.ProductInfo;

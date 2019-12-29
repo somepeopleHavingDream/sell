@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.buyer;
 
 import com.imooc.converter.OrderForm2OrderDTOConverter;
 import com.imooc.dto.OrderDTO;

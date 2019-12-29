@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.wechat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

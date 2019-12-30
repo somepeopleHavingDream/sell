@@ -32,7 +32,8 @@ public enum ResultEnum {
     LOGIN_FAIL(25, "登录失败，登录信息不正确"),
     LOGOUT_SUCCESS(26, "登出成功"),
     CANT_FIND_TOKEN_IN_COOKIE(27, "Cookie中查不到token"),
-    CANT_FIND_TOKEN_IN_REDIS(28, "Redis中查不到token");
+    CANT_FIND_TOKEN_IN_REDIS(28, "Redis中查不到token"),
+    WX_TEMPLATE_MESSAGE_SEND_FAIL(29, "微信模板消息发送失败");
 
     /**
      * 状态码

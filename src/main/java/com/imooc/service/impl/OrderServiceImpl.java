@@ -12,6 +12,7 @@ import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.repository.OrderDetailRepository;
 import com.imooc.repository.OrderMasterRepository;
+import com.imooc.service.MessagePushService;
 import com.imooc.service.OrderService;
 import com.imooc.service.PayService;
 import com.imooc.service.ProductService;
@@ -42,6 +43,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
+    private final MessagePushService messagePushService;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderMasterRepository orderMasterRepository;
 
@@ -53,9 +55,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     public OrderServiceImpl(ProductService productService,
-                            OrderDetailRepository orderDetailRepository,
+                            MessagePushService messagePushService, OrderDetailRepository orderDetailRepository,
                             OrderMasterRepository orderMasterRepository) {
         this.productService = productService;
+        this.messagePushService = messagePushService;
         this.orderDetailRepository = orderDetailRepository;
         this.orderMasterRepository = orderMasterRepository;
 //        this.payService = payService;
@@ -126,7 +129,6 @@ public class OrderServiceImpl implements OrderService {
 
         // 设置订单dto
         OrderDTO orderDTO = OrderDTO.builder().build();
-//        OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
         orderDTO.setOrderDetailList(orderDetailList);
 
@@ -214,6 +216,9 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】更新失败，orderMaster=[{}]", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        // 推送微信模板消息
+        messagePushService.pushOrderStatus(orderDTO);
 
         return orderDTO;
     }

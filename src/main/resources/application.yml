@@ -3,15 +3,15 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-#    url: jdbc:mysql://10.10.2.255/sell?characterEncoding=utf-8&useSSL=false
-    url: jdbc:mysql://192.168.1.106/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://10.10.2.255/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://192.168.1.106/sell?characterEncoding=utf-8&useSSL=false
 #  jpa:
 #    show-sql: true
   jackson:
     default-property-inclusion: non_null
   redis:
-#    host: 10.10.2.255
-    host: 192.168.1.106
+    host: 10.10.2.255
+#    host: 192.168.1.106
     port: 6379
 
 server:
@@ -20,8 +20,8 @@ server:
 
 wechat:
   # 公众帐号，授权
-  mpAppId: wxd898fcb01713c658
-#  mpAppId: wxb9b8ef133831adbe
+#  mpAppId: wxd898fcb01713c658
+  mpAppId: wxb9b8ef133831adbe
   mpAppSecret: 22d95c1f0751d30e9f1919e674e6173c
 
   # 开发平台
@@ -36,6 +36,9 @@ wechat:
   # 发起支付不需要证书，退款需要
   keyPath: wx_cert/h5.p12
   notifyUrl: http://yxsell.nat300.top/sell/pay/notify
+
+  templateId:
+    orderStatus: SU4Q9_ApDCKfjsLbqR6Q0I36QZl7xuWz2qjR3Y7E2PM
 
 projectUrl:
   wechatMpAuthorize: http://yxsell.nat300.top

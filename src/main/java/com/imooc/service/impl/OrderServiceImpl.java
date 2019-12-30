@@ -17,6 +17,7 @@ import com.imooc.service.OrderService;
 import com.imooc.service.PayService;
 import com.imooc.service.ProductService;
 import com.imooc.util.KeyUtil;
+import com.imooc.websocket.WebSocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
     private final MessagePushService messagePushService;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderMasterRepository orderMasterRepository;
+    private final WebSocket webSocket;
 
     /**
      * 为了避免环形自动装配，而不采用private final的方式
@@ -56,12 +58,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     public OrderServiceImpl(ProductService productService,
                             MessagePushService messagePushService, OrderDetailRepository orderDetailRepository,
-                            OrderMasterRepository orderMasterRepository) {
+                            OrderMasterRepository orderMasterRepository, WebSocket webSocket) {
         this.productService = productService;
         this.messagePushService = messagePushService;
         this.orderDetailRepository = orderDetailRepository;
         this.orderMasterRepository = orderMasterRepository;
-//        this.payService = payService;
+        this.webSocket = webSocket;
     }
 
     /**
@@ -109,6 +111,9 @@ public class OrderServiceImpl implements OrderService {
                 .map(orderDetail -> new CartDTO(orderDetail.getProductId(), orderDetail.getProductQuantity()))
                 .collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+
+        // 发送websocket消息
+        webSocket.onMessage("您有新的订单！");
 
         return orderDTO;
     }

@@ -1,9 +1,6 @@
 package com.imooc.aspect;
 
 import com.imooc.constant.CookieConstant;
-import com.imooc.constant.RedisConstant;
-import com.imooc.enums.ResultEnum;
-import com.imooc.exception.SellerAuthorizeException;
 import com.imooc.util.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,7 +9,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -53,19 +49,22 @@ public class SellerAuthorizeAspect {
 
         // 查询cookie
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
-        if (cookie == null) {
-            log.warn("【登录校验】" + ResultEnum.CANT_FIND_TOKEN_IN_COOKIE.getMessage());
-//            log.warn("【登录校验】Cookie中查不到token");
-            throw new SellerAuthorizeException();
-        }
 
-        // 去redis里面查
-        String tokenValue = redisTemplate.opsForValue()
-                .get(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
-        if (StringUtils.isEmpty(tokenValue)) {
-            log.warn("【登录校验】" + ResultEnum.CANT_FIND_TOKEN_IN_REDIS.getMessage());
-//            log.warn("【登录校验】Redis中查不到token");
-            throw new SellerAuthorizeException();
-        }
+        // 为了方便调试，此处不对登录校验，直接return
+
+//        if (cookie == null) {
+//            log.warn("【登录校验】" + ResultEnum.CANT_FIND_TOKEN_IN_COOKIE.getMessage());
+//            throw new SellerAuthorizeException();
+//        }
+//
+//        // 去redis里面查
+//        String tokenValue = redisTemplate.opsForValue()
+//                .get(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
+//        if (StringUtils.isEmpty(tokenValue)) {
+//            // 为了方便调试，此处不对登录进行校验
+//
+//            log.warn("【登录校验】" + ResultEnum.CANT_FIND_TOKEN_IN_REDIS.getMessage());
+//            throw new SellerAuthorizeException();
+//        }
     }
 }

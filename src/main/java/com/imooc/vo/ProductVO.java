@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,9 @@ import java.util.List;
  */
 @Data
 @Builder
-public class ProductVO {
+public class ProductVO implements Serializable {
+    private static final long serialVersionUID = -3974213702722475854L;
+
     @JsonProperty("name")
     private String categoryName;
 

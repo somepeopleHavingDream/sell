@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.10.2.255/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://192.168.1.106/sell?characterEncoding=utf-8&useSSL=false
+#  jpa:
+#    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    host: 10.10.2.255
+#    host: 192.168.1.106
+    port: 6379
+
+server:
+  context-path: /sell
+  port: 18080
+
+wechat:
+  # 公众帐号，授权
+#  mpAppId: wxd898fcb01713c658
+  mpAppId: wxb9b8ef133831adbe
+  mpAppSecret: 22d95c1f0751d30e9f1919e674e6173c
+
+  # 开发平台
+#  openAppId: oTgZpwQGQoHHb-opLH0u6EnxRD9w
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
+
+  # 支付/商户号
+  mchId: 1483469312
+  mchKey: 098F6BCD4621D373CADE4E832627B4F6
+
+  # 发起支付不需要证书，退款需要
+  keyPath: wx_cert/h5.p12
+  notifyUrl: http://yxsell.nat300.top/sell/pay/notify
+
+  templateId:
+    orderStatus: SU4Q9_ApDCKfjsLbqR6Q0I36QZl7xuWz2qjR3Y7E2PM
+
+projectUrl:
+  wechatMpAuthorize: http://yxsell.nat300.top
+  wechatOpenAuthorize: http://yxsell.nat300.top
+  sell: http://yxsell.nat300.top

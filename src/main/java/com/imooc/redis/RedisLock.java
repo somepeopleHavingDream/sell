@@ -32,10 +32,12 @@ public class RedisLock {
      * @return 是否加锁成功
      */
     public boolean lock(String key, String value) {
+        // 如果没有这个键，则直接上锁成功
         if (redisTemplate.opsForValue().setIfAbsent(key, value)) {
             return true;
         }
 
+        // 存取该键的旧值
         String currentValue = redisTemplate.opsForValue().get(key);
 
         // 如果锁过期
@@ -43,7 +45,7 @@ public class RedisLock {
             // 获取上一个锁的时间
             String oldValue = redisTemplate.opsForValue().getAndSet(key, value);
 
-            // 其中一个线程拿到锁
+            // 说明在当前线程抢锁的过程，有另外一个线程拿到锁
             return !StringUtils.isEmpty(oldValue) && Objects.equals(currentValue, oldValue);
         }
 

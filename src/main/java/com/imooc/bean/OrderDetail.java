@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @Data
 public class OrderDetail {
+
     @Id
     private String detailId;
 

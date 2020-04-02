@@ -7,6 +7,7 @@ package com.imooc.constant;
  * 2019/12/24 21:40
  */
 public interface RedisConstant {
+
     /**
      * token前缀
      */

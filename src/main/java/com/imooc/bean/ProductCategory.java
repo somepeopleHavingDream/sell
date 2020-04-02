@@ -20,6 +20,7 @@ import java.util.Date;
 @DynamicUpdate
 @NoArgsConstructor
 public class ProductCategory {
+
     /**
      * 类目Id
      */

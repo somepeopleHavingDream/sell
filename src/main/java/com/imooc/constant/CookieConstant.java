@@ -7,6 +7,7 @@ package com.imooc.constant;
  * 2019/10/24 22:25
  */
 public interface CookieConstant {
+
     /**
      * token
      */

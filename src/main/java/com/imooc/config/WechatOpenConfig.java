@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WechatOpenConfig {
+
     private final WechatAccountConfig accountConfig;
 
     @Autowired

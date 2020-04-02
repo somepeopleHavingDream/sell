@@ -16,6 +16,7 @@ import java.util.Map;
 @Component
 @ConfigurationProperties(prefix = "wechat")
 public class WechatAccountConfig {
+
     /**
      * 公众平台appId
      */

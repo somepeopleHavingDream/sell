@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Slf4j
 public class SellerAuthorizeAspect {
+
     private final StringRedisTemplate redisTemplate;
 
     @Autowired

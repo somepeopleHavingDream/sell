@@ -20,6 +20,7 @@ import java.util.Date;
 @Data
 @DynamicUpdate
 public class OrderMaster {
+
     /**
      * 订单Id
      */

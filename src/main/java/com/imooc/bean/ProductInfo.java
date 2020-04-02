@@ -21,6 +21,7 @@ import java.util.Date;
 @Data
 @DynamicUpdate
 public class ProductInfo {
+
     @Id
     private String productId;
 

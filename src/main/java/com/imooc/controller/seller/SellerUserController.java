@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/seller")
 @Slf4j
 public class SellerUserController {
+
     private final SellerService sellerService;
     private final StringRedisTemplate redisTemplate;
     private final ProjectUrlConfig projectUrlConfig;

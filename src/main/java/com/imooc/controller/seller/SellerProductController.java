@@ -34,6 +34,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/seller/product")
 public class SellerProductController {
+
     private final ProductService productService;
     private final ProductCategoryService productCategoryService;
 

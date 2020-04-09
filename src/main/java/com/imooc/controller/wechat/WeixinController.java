@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/weixin")
 @Slf4j
 public class WeixinController {
+
     /**
      * 微信网页授权
      */

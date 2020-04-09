@@ -27,6 +27,7 @@ import java.net.URLEncoder;
 @RequestMapping("/wechat")
 @Slf4j
 public class WechatController {
+
     private final WxMpService wxMpService;
     private final WxMpService wxOpenService;
 

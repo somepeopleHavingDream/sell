@@ -12,6 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ResultEnum {
+
     SUCCESS(0, "成功"),
     PARAM_ERROR(1, "参数不正确"),
     PRODUCT_NOT_EXIST(10, "商品不存在"),
@@ -38,10 +39,10 @@ public enum ResultEnum {
     /**
      * 状态码
      */
-    private Integer code;
+    private final Integer code;
 
     /**
      * 提示信息
      */
-    private String message;
+    private final String message;
 }

@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class CategoryForm {
+
     private Integer categoryId;
 
     /**

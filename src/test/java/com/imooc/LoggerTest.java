@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @Slf4j
 public class LoggerTest {
+
     @Test
     public void test1() {
         String name = "imooc";

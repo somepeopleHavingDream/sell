@@ -19,6 +19,7 @@ import java.util.List;
  */
 @Slf4j
 public final class OrderForm2OrderDTOConverter {
+
     private static final Gson gson = new Gson();
 
     public static OrderDTO convert(OrderForm orderForm) {

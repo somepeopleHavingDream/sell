@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
  * 2019/06/23 21:36
  */
 public final class OrderMaster2OrderDTOConverter {
+
     /**
      * 将单个订单对象转换成OrderDTO对象
      *

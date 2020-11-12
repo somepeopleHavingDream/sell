@@ -29,6 +29,7 @@ import java.util.Map;
  * @author yangxin
  * 2019/06/27 21:45
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 @RestController
 @RequestMapping("/buyer/order")
 @Slf4j

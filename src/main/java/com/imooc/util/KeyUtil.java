@@ -9,6 +9,7 @@ import java.util.Random;
  * 2019/06/18 14:09
  */
 public class KeyUtil {
+
     /**
      * 生成唯一的主键
      * 格式：时间+随机数

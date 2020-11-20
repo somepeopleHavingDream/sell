@@ -2,6 +2,7 @@ package com.imooc.exception;
 
 import com.imooc.enums.ResultEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 业务异常类
@@ -9,8 +10,10 @@ import lombok.Data;
  * @author yangxin
  * 2019/06/18 13:59
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SellException extends RuntimeException {
+
     /**
      * 状态码
      */

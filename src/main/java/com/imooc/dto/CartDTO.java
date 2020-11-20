@@ -12,9 +12,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CartDTO {
-    // 商品Id
+
+    /**
+     * 商品Id
+     */
     private String productId;
 
-    // 数量
+    /**
+     * 数量
+     */
     private Integer productQuantity;
 }

@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class MessagePushServiceImpl implements MessagePushService {
+
     private final WxMpService wxMpService;
     private final WechatAccountConfig wechatAccountConfig;
 

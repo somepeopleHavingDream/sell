@@ -14,6 +14,7 @@ import java.util.List;
  * 2019/06/08 15:35
  */
 public interface ProductService {
+
     ProductInfo findOne(String productId);
 
     /**

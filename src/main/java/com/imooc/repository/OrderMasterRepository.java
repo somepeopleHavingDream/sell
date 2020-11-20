@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2019/06/16 19:54
  */
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
+
     /**
      * 通过买家openid分页查询
      *

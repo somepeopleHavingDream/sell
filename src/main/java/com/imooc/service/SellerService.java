@@ -9,6 +9,7 @@ import com.imooc.bean.SellerInfo;
  * 2019/11/23 22:29
  */
 public interface SellerService {
+
     /**
      * 通过openid查询卖家端信息
      *

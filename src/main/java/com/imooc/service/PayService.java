@@ -10,6 +10,7 @@ import com.lly835.bestpay.model.PayResponse;
  * 2019/10/23 13:50
  */
 public interface PayService {
+
     /**
      * 发起支付
      */

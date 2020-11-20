@@ -11,6 +11,7 @@ import java.util.List;
  * 2019/06/08 11:44
  */
 public interface ProductCategoryService {
+
     ProductCategory findOne(Integer categoryId);
     List<ProductCategory> findAll();
 

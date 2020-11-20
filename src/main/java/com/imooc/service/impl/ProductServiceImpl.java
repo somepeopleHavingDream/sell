@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class ProductServiceImpl implements ProductService {
+
     private final ProductInfoRepository productInfoRepository;
 
     @Autowired

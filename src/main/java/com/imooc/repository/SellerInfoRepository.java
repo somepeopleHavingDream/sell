@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2019/11/23 20:12
  */
 public interface SellerInfoRepository extends JpaRepository<SellerInfo, String> {
+
     /**
      * 通过openid获得卖家记录
      *

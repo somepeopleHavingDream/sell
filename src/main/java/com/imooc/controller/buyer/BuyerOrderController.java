@@ -29,6 +29,7 @@ import java.util.Map;
  * @author yangxin
  * 2019/06/27 21:45
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 @RestController
 @RequestMapping("/buyer/order")
 @Slf4j
@@ -65,7 +66,7 @@ public class BuyerOrderController {
         Map<String, String> map = new HashMap<>();
         map.put("orderId", createResult.getOrderId());
 
-        return ResultVOUtil.sucess(map);
+        return ResultVOUtil.success(map);
     }
 
     /**
@@ -87,7 +88,7 @@ public class BuyerOrderController {
         PageRequest pageRequest = new PageRequest(page, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, pageRequest);
 
-        return ResultVOUtil.sucess(orderDTOPage.getContent());
+        return ResultVOUtil.success(orderDTOPage.getContent());
     }
 
     /**
@@ -97,7 +98,7 @@ public class BuyerOrderController {
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
-        return ResultVOUtil.sucess(orderDTO);
+        return ResultVOUtil.success(orderDTO);
     }
 
     /**
@@ -107,6 +108,6 @@ public class BuyerOrderController {
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
-        return ResultVOUtil.sucess();
+        return ResultVOUtil.success();
     }
 }

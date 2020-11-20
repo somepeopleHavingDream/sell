@@ -40,6 +40,7 @@ import java.util.stream.Collectors;
  * @author yangxin
  * 2019/06/17 22:46
  */
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Service
 @Slf4j
 public class OrderServiceImpl implements OrderService {

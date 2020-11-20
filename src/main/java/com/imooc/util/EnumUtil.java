@@ -11,6 +11,7 @@ import java.util.Objects;
  * 2019/10/30 15:58
  */
 public class EnumUtil {
+
     /**
      * 通过状态值获得枚举对象
      */

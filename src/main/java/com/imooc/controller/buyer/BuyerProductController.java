@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
  * @author yangxin
  * 2019/06/08 16:05
  */
+@SuppressWarnings("rawtypes")
 @RestController
 @RequestMapping("/buyer/product")
 @Slf4j
@@ -82,6 +83,6 @@ public class BuyerProductController {
             productVOList.add(productVO);
         }
 
-        return ResultVOUtil.sucess(productVOList);
+        return ResultVOUtil.success(productVOList);
     }
 }

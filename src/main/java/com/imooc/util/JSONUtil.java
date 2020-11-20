@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
  * 2019/10/23 15:57
  */
 public class JSONUtil {
+
     /**
      * 将对象转换成json
      */

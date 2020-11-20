@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
  * @author yangxin
  * 2019/12/29 13:01
  */
+@SuppressWarnings("rawtypes")
 @ControllerAdvice
 public class SellExceptionHandler {
+
     private final ProjectUrlConfig projectUrlConfig;
 
     @Autowired

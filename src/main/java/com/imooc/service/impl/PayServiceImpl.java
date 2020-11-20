@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class PayServiceImpl implements PayService {
+
     private static final String ORDER_NAME = "微信点餐订单";
 
     private final BestPayServiceImpl bestPayService;

@@ -9,6 +9,7 @@ import com.imooc.dto.OrderDTO;
  * 2019/12/30 10:37
  */
 public interface MessagePushService {
+
     /**
      * 订单状态变更消息
      */

@@ -7,6 +7,7 @@ package com.imooc.util;
  * 2019/10/29 14:38
  */
 public class MathUtil {
+
     private static final Double MONEY_RANGE = 0.01;
 
     /**

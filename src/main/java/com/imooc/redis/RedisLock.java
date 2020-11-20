@@ -17,6 +17,7 @@ import java.util.Objects;
 @Component
 @Slf4j
 public class RedisLock {
+
     private final StringRedisTemplate redisTemplate;
 
     @Autowired

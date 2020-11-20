@@ -23,6 +23,7 @@ import java.net.URLEncoder;
  * @author yangxin
  * 2019/10/15 17:55
  */
+@SuppressWarnings({"DuplicatedCode", "SpringMVCViewInspection"})
 @Controller
 @RequestMapping("/wechat")
 @Slf4j
@@ -86,14 +87,14 @@ public class WechatController {
      * https://open.weixin.qq.com/connect/qrconnect?appid=wx6ad144e54af67d87&redirect_uri=http%3A%2F%2Fsell.springboot.cn%2Fsell%2Fqr%2FoTgZpwQGQoHHb-opLH0u6EnxRD9w&response_type=code&scope=snsapi_login&state=http%3a%2f%2fyxsell.nat300.top%2fsell%2fwechat%2fqrUserInfo
      */
     @GetMapping("/qrAuthorize")
-    public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
+    public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) throws UnsupportedEncodingException {
         // 要接收code的url地址
         log.info("returnUrl: [{}]", returnUrl);
 
         String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
         String redirectUrl = wxOpenService.buildQrConnectUrl(url,
                 WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN,
-                URLEncoder.encode(returnUrl));
+                URLEncoder.encode(returnUrl, "UTF-8"));
         log.info("redirectUrl: [{}]", redirectUrl);
 
         // 微信回调地址

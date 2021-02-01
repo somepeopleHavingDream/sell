@@ -24,20 +24,20 @@ public class WebSocket {
 
     private Session session;
 
-    private static final CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<>();
+    private static final CopyOnWriteArraySet<WebSocket> WEB_SOCKET_SET = new CopyOnWriteArraySet<>();
 
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
 
-        webSocketSet.add(this);
-        log.info("【websocket消息】有新的连接，总数：[{}]", webSocketSet.size());
+        WEB_SOCKET_SET.add(this);
+        log.info("【websocket消息】有新的连接，总数：[{}]", WEB_SOCKET_SET.size());
     }
 
     @OnClose
     public void onClose() {
-        webSocketSet.remove(this);
-        log.info("【websocket消息】连接断开，总数：[{}]", webSocketSet.size());
+        WEB_SOCKET_SET.remove(this);
+        log.info("【websocket消息】连接断开，总数：[{}]", WEB_SOCKET_SET.size());
     }
 
     @OnMessage
@@ -49,7 +49,7 @@ public class WebSocket {
      * 发送消息（这个好像是广播消息）
      */
     public void sendMessage(String message) {
-        for (WebSocket webSocket : webSocketSet) {
+        for (WebSocket webSocket : WEB_SOCKET_SET) {
             log.info("【websocket消息】广播消息，message=[{}]", message);
 
             try {
@@ -58,5 +58,15 @@ public class WebSocket {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

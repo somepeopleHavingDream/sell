@@ -9,6 +9,7 @@ import lombok.Getter;
  * @author yangxin
  * 2019/06/16 19:44
  */
+@SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
 @Getter
 @AllArgsConstructor
 public enum PayStatusEnum implements CodeEnum {

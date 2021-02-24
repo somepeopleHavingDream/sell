@@ -21,6 +21,7 @@ import java.util.List;
  * @author yangxin
  * 2019/12/31 10:39
  */
+@SuppressWarnings("AlibabaRemoveCommentedCode")
 @Service
 @Slf4j
 public class MessagePushServiceImpl implements MessagePushService {

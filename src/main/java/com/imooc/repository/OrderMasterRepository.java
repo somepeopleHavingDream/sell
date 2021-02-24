@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author yangxin
  * 2019/06/16 19:54
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
 
     /**

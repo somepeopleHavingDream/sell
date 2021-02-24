@@ -9,6 +9,7 @@ import java.util.List;
  * @author yangxin
  * 2019/05/26 14:56
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer> {
 
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);

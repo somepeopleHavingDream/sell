@@ -70,9 +70,14 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 创建订单
+     *
+     * 在@Transactional注解中如果不配置rollbackFor属性，
+     * 那么事务只会在遇到RuntimeException的时候才会回滚，
+     * 加上rollbackFor=Exception.class，
+     * 可以让事务在遇到非运行时异常时也回滚。
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderDTO create(OrderDTO orderDTO) {
         // 订单唯一编号
         String orderId = KeyUtil.generateUniqueKey();

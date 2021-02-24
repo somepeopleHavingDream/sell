@@ -8,6 +8,7 @@ import com.imooc.dto.OrderDTO;
  * @author yangxin
  * 2019/12/30 10:37
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface MessagePushService {
 
     /**

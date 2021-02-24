@@ -44,9 +44,9 @@ public class SellerOrderController {
         log.info("page: [{}], size: [{}]", page, size);
 
         PageRequest pageRequest = new PageRequest(page - 1, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        Page<OrderDTO> orderDtoPage = orderService.findList(pageRequest);
 
-        map.put("orderDTOPage", orderDTOPage);
+        map.put("orderDtoPage", orderDtoPage);
         map.put("currentPage", page);
         map.put("size", size);
 

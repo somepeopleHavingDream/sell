@@ -13,6 +13,7 @@ import java.util.List;
  * @author yangxin
  * 2019/06/08 15:35
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface ProductService {
 
     ProductInfo findOne(String productId);

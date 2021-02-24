@@ -1,6 +1,6 @@
 package com.imooc.controller.buyer;
 
-import com.imooc.converter.OrderForm2OrderDTOConverter;
+import com.imooc.converter.OrderForm2OrderDtoConverter;
 import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
@@ -55,7 +55,7 @@ public class BuyerOrderController {
                     bindingResult.getFieldError().getDefaultMessage());
         }
 
-        OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
+        OrderDTO orderDTO = OrderForm2OrderDtoConverter.convert(orderForm);
         if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
             log.error("【创建订单】购物车不能为空");
             throw new SellException(ResultEnum.CART_EMPTY);
@@ -63,7 +63,7 @@ public class BuyerOrderController {
 
         OrderDTO createResult = orderService.create(orderDTO);
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(1);
         map.put("orderId", createResult.getOrderId());
 
         return ResultVOUtil.success(map);
@@ -86,9 +86,9 @@ public class BuyerOrderController {
 
         // 查询订单列表
         PageRequest pageRequest = new PageRequest(page, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(openid, pageRequest);
+        Page<OrderDTO> orderDtoPage = orderService.findList(openid, pageRequest);
 
-        return ResultVOUtil.success(orderDTOPage.getContent());
+        return ResultVOUtil.success(orderDtoPage.getContent());
     }
 
     /**

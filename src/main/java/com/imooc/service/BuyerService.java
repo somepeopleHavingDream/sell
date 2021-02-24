@@ -8,7 +8,7 @@ import com.imooc.dto.OrderDTO;
  * @author yangxin
  * 2019/07/01 20:40
  */
-@SuppressWarnings("UnusedReturnValue")
+@SuppressWarnings({"UnusedReturnValue", "AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc"})
 public interface BuyerService {
 
     /**

@@ -66,16 +66,16 @@ public class WechatController {
         log.info("code: [{}], returnUrl: [{}]", code, returnUrl);
 
         // 通过code换取网页授权access_token
-        WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
+        WxMpOAuth2AccessToken wxMpOauth2AccessToken;
         try {
             // 构建获取access_token的url
-            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            wxMpOauth2AccessToken = wxMpService.oauth2getAccessToken(code);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】", e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
 
-        String openId = wxMpOAuth2AccessToken.getOpenId();
+        String openId = wxMpOauth2AccessToken.getOpenId();
         log.info("openId: [{}]", openId);
 
         return "redirect:" + returnUrl + "?openid=" + openId;
@@ -112,16 +112,16 @@ public class WechatController {
         log.info("code: [{}], returnUrl: [{}]", code, returnUrl);
 
         // 通过code换取网页授权access_token
-        WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
+        WxMpOAuth2AccessToken wxMpOauth2AccessToken;
         try {
             // 构建获取access_token的url
-            wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
+            wxMpOauth2AccessToken = wxOpenService.oauth2getAccessToken(code);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】", e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
 
-        String openId = wxMpOAuth2AccessToken.getOpenId();
+        String openId = wxMpOauth2AccessToken.getOpenId();
         log.info("openId: [{}]", openId);
 
         return "redirect:" + returnUrl + "?openid=" + openId;

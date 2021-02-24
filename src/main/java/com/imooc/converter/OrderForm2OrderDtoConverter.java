@@ -18,9 +18,9 @@ import java.util.List;
  * 2019/06/27 21:52
  */
 @Slf4j
-public final class OrderForm2OrderDTOConverter {
+public final class OrderForm2OrderDtoConverter {
 
-    private static final Gson gson = new Gson();
+    private static final Gson GSON = new Gson();
 
     public static OrderDTO convert(OrderForm orderForm) {
         OrderDTO orderDTO = OrderDTO.builder().build();
@@ -31,7 +31,7 @@ public final class OrderForm2OrderDTOConverter {
 
         List<OrderDetail> orderDetailList;
         try {
-            orderDetailList = gson.fromJson(orderForm.getItems(),
+            orderDetailList = GSON.fromJson(orderForm.getItems(),
                     new TypeToken<List<OrderDetail>>(){}.getType());
         } catch (Exception e) {
             log.error("【对象转换】错误，string=[{}]", orderForm.getItems());

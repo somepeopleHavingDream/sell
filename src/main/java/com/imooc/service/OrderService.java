@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
  * @author yangxin
  * 2019/06/17 22:41
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface OrderService {
 
     /**

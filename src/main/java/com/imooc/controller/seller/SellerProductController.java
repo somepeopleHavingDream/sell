@@ -31,6 +31,7 @@ import java.util.Map;
  * @author yangxin
  * 2019/11/01 21:40
  */
+@SuppressWarnings({"AlibabaCommentsMustBeJavadocFormat", "AlibabaRemoveCommentedCode"})
 @Controller
 @RequestMapping("/seller/product")
 public class SellerProductController {

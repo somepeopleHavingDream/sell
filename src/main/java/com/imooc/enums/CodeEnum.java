@@ -6,6 +6,7 @@ package com.imooc.enums;
  * @author yangxin
  * 2019/10/30 15:54
  */
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface CodeEnum {
 
     /**

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author yangxin
  * 2019/12/27 17:17
  */
+@SuppressWarnings("CommentedOutCode")
 @Aspect
 @Component
 @Slf4j

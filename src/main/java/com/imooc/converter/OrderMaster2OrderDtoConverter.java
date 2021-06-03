@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author yangxin
  * 2019/06/23 21:36
  */
-public final class OrderMaster2OrderDTOConverter {
+public final class OrderMaster2OrderDtoConverter {
 
     /**
      * 将单个订单对象转换成OrderDTO对象
@@ -33,7 +33,7 @@ public final class OrderMaster2OrderDTOConverter {
      */
     public static List<OrderDTO> convert(List<OrderMaster> orderMasterList) {
         return orderMasterList.stream()
-                    .map(OrderMaster2OrderDTOConverter::convert)
+                    .map(OrderMaster2OrderDtoConverter::convert)
                     .collect(Collectors.toList());
     }
 }

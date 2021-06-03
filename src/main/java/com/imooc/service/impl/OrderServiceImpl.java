@@ -3,7 +3,7 @@ package com.imooc.service.impl;
 import com.imooc.bean.OrderDetail;
 import com.imooc.bean.OrderMaster;
 import com.imooc.bean.ProductInfo;
-import com.imooc.converter.OrderMaster2OrderDTOConverter;
+import com.imooc.converter.OrderMaster2OrderDtoConverter;
 import com.imooc.dto.CartDTO;
 import com.imooc.dto.OrderDTO;
 import com.imooc.enums.OrderStatusEnum;
@@ -152,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
         // 分页查询订单列表
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
         // 将订单对象集合转换为OrderDTO对象集合
-        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDtoConverter.convert(orderMasterPage.getContent());
 
         return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
     }
@@ -162,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
         // 分页查询订单列表
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
         // 将订单对象集合转换为OrderDTO对象集合
-        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDtoConverter.convert(orderMasterPage.getContent());
 
         return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
     }

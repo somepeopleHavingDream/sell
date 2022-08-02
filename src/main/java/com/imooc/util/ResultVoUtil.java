@@ -9,7 +9,7 @@ import com.imooc.vo.ResultVO;
  * 2019/06/09 11:32
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ResultVOUtil {
+public class ResultVoUtil {
 
     /**
      * 成功

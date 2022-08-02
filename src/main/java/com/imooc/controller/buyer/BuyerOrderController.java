@@ -7,7 +7,7 @@ import com.imooc.exception.SellException;
 import com.imooc.form.OrderForm;
 import com.imooc.service.BuyerService;
 import com.imooc.service.OrderService;
-import com.imooc.util.ResultVOUtil;
+import com.imooc.util.ResultVoUtil;
 import com.imooc.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class BuyerOrderController {
         Map<String, String> map = new HashMap<>(1);
         map.put("orderId", createResult.getOrderId());
 
-        return ResultVOUtil.success(map);
+        return ResultVoUtil.success(map);
     }
 
     /**
@@ -88,7 +88,7 @@ public class BuyerOrderController {
         PageRequest pageRequest = new PageRequest(page, size);
         Page<OrderDTO> orderDtoPage = orderService.findList(openid, pageRequest);
 
-        return ResultVOUtil.success(orderDtoPage.getContent());
+        return ResultVoUtil.success(orderDtoPage.getContent());
     }
 
     /**
@@ -98,7 +98,7 @@ public class BuyerOrderController {
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
-        return ResultVOUtil.success(orderDTO);
+        return ResultVoUtil.success(orderDTO);
     }
 
     /**
@@ -108,6 +108,6 @@ public class BuyerOrderController {
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
-        return ResultVOUtil.success();
+        return ResultVoUtil.success();
     }
 }

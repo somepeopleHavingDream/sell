@@ -4,7 +4,7 @@ import com.imooc.bean.ProductCategory;
 import com.imooc.bean.ProductInfo;
 import com.imooc.service.ProductCategoryService;
 import com.imooc.service.ProductService;
-import com.imooc.util.ResultVOUtil;
+import com.imooc.util.ResultVoUtil;
 import com.imooc.vo.ProductInfoVO;
 import com.imooc.vo.ProductVO;
 import com.imooc.vo.ResultVO;
@@ -83,6 +83,6 @@ public class BuyerProductController {
             productVOList.add(productVO);
         }
 
-        return ResultVOUtil.success(productVOList);
+        return ResultVoUtil.success(productVOList);
     }
 }

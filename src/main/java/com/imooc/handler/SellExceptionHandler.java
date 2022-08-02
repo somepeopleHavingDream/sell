@@ -3,7 +3,7 @@ package com.imooc.handler;
 import com.imooc.config.ProjectUrlConfig;
 import com.imooc.exception.SellException;
 import com.imooc.exception.SellerAuthorizeException;
-import com.imooc.util.ResultVOUtil;
+import com.imooc.util.ResultVoUtil;
 import com.imooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,6 +47,6 @@ public class SellExceptionHandler {
     @ExceptionHandler(SellException.class)
     @ResponseBody
     public ResultVO handleSellException(SellException e) {
-        return ResultVOUtil.error(e.getCode(), e.getMessage());
+        return ResultVoUtil.error(e.getCode(), e.getMessage());
     }
 }
